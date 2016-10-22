@@ -1,0 +1,45 @@
+{
+  "title": "Moyu Dev Blog",
+
+  "leftPic": {
+    "smText": "Welcome to",
+    "lgText": "Here",
+    "bgUrl": "https://unsplash.it/2000/1200?image=1074"
+  },
+
+  "pageSize": 6,
+  "summaryNumber": 100,
+
+  "iconTarget": "_blank",
+  "icons": [
+    {
+      "key": "envelope-o",
+      "url": "mailto:"
+    }, {
+      "key": "github",
+      "url": ""
+    }, {
+      "key": "codepen"
+    }, {
+      "key": "linkedin"
+    }, {
+      "key": "twitter"
+    }, {
+      "key": "facebook"
+    }
+  ],
+  "profile": {
+    "contentHtml": "toy cool",
+    "image": "https://unsplash.it/2000/1200?image=447"
+  },
+  "fillCovers": [
+    "https://unsplash.it/2000/1200?image=447",
+    "https://unsplash.it/2000/1200?image=674",
+    "https://unsplash.it/2000/1200?image=447",
+    "https://unsplash.it/2000/1200?image=40",
+    "https://unsplash.it/2000/1200?image=1074",
+    "https://unsplash.it/2000/1200?image=1003",
+    "https://unsplash.it/2000/1200?image=16"
+  ],
+  "lazyLoadCover": false
+}
