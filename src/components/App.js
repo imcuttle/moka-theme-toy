@@ -234,7 +234,7 @@ class App extends React.Component {
                     <div>
                         <Header active="0" links={['/tags/'+tagName, '/tags']} texts={[tagName, 'Tags']} />
                         <div className="tab active">
-                            <Posts posts={posts}/>
+                            <Posts posts={posts} hoverHandler={a=>actions.setBigPicBg(a)}/>
                             <Pagination prev={prev} next={next}/>
                             <Footer icons={icons} method={iconTarget}/>
                         </div>
