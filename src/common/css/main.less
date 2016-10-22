@@ -10,7 +10,7 @@
   font-style: normal
 }
 
-@font-face{font-family:'LiberationMonoRegular';src:url("~/fonts/liberation-mono-webfont.eot");src:url("~/fonts/liberation-mono-webfont.eot?#iefix") format("embedded-opentype"),url("~/fonts/liberation-mono-webfont.woff") format("woff"),url("~/fonts/liberation-mono-webfont.ttf") format("truetype"),url("~/fonts/liberation-mono-webfont.svg#LiberationMonoRegular") format("svg");font-weight:normal;font-style:normal}
+@font-face{font-family:'LiberationMonoRegular';src:url("fonts/liberation-mono-webfont.eot");src:url("fonts/liberation-mono-webfont.eot?#iefix") format("embedded-opentype"),url("fonts/liberation-mono-webfont.woff") format("woff"),url("fonts/liberation-mono-webfont.ttf") format("truetype"),url("fonts/liberation-mono-webfont.svg#LiberationMonoRegular") format("svg");font-weight:normal;font-style:normal}
 
 .example-enter {
   opacity: 0.01;
@@ -122,7 +122,8 @@ p {
   margin: 0 0 0.75em
 }
 a {
-  color: #0a0a0a;
+  color: #656b6c;
+  //: #0a0a0a;
   text-decoration: none;
   -webkit-transition: color 0.4s ease-in-out;
   transition: color 0.4s ease-in-out
@@ -619,7 +620,6 @@ section {
   color: #fff
 }
 .post {
-  color: #2c2d33;
   width: 90%;
   max-width: 54em;
   margin: 0 auto;
@@ -659,7 +659,7 @@ section {
   padding-left: 1em;
   padding-right: 1em;
   font-style: italic;
-  font-size: .8em;
+  font-size: .9em;
   border-left: .3em solid #d4d4d4;
 
   p {
@@ -669,11 +669,30 @@ section {
 }
 
 .post {
+  color: #6c6c6c;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: rgba(44,45,51, .7);
+  }
+  pre {
+    color: #586e75;
+    font-size: .8em;
+    line-height: 1.5;
+  }
   ul, ol {
     padding-left: 25px;
     line-height: 1.6;
     list-style: inherit;
+
+    li:first-child {
+      margin-top: 15px;
+    }
+    li {
+      margin-bottom: 15px;
+    }
   }
+
   table {
     width: 100%;
     border-collapse: collapse;
@@ -699,23 +718,29 @@ section {
   }
 }
 
-* {
+body {
   font-family: "weblysleek_uilight", "Source Code Pro", Sana
 }
-a>code, figcaption>code, li>code, p>code, td>code, h1>code,h2>code,h3>code, h4>code {
-    margin-left: 2px;
-    margin-right: 2px;
-    padding: .1rem .2rem;
+code, kbd, pre, samp {
+  font-family: LiberationMonoRegular,monospace;
+}
+a>code, figcaption>code, li>code, p>code, td>code, h1>code,h2>code,h3>code, h4>code, h5> code {
+    margin-left: 3px;
+    margin-right: 3px;
+    padding: .2rem .2rem;
+    vertical-align: middle;
     font-size: .9em;
     border-radius: 2px;
-    background-color: #efecf4;
+    background-color: #eae9f2;
+    font-family: weblysleek_uilight,sans-serif;
+    color: rgba(10, 4, 10, 0.9);
 }
 .post h4 {
   font-size: 1.5em;
 }
 
 .post p:first-child {
-  font-size: 1.25em
+  //font-size: 1.25em
 }
 .post a {
   border-bottom: 1px solid #9f8f68

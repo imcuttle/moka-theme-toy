@@ -65,7 +65,14 @@ var config = {
 }
 if(minimize) {
     config.plugins.push(
-        new webpack.optimize.UglifyJsPlugin()
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                //supresses warnings, usually from module minification
+                warnings: false
+            }
+        }),
+        //允许错误不打断程序
+        new webpack.NoErrorsPlugin()
     )
 }
 
