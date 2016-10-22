@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mini",
+    "build": "NODE_ENV=production webpack --mini",
     "dev": "open http://localhost:8080/webpack-dev-server/ && node index.js",
     "cdev": "webpack-dev-server --devtool eval --hot --progress --colors --content-base build",
     "test": "echo \"Error: no test specified\" && exit 1"
