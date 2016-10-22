@@ -251,12 +251,12 @@ class App extends React.Component {
             let nextdata;
             const i = sorted.indexOf(hrefTitle)
             if(i>=0 && i!=sorted.length-1) {
+                utils.setTitle(main[sorted[i]].head.title +' - '+title);
                 nextdata = {
                     title: main[sorted[i+1]].head.title,
                     cover: main[sorted[i+1]].head.cover,
                     href: '/article/'+sorted[i+1]
                 }
-                utils.setTitle(nextdata.title +' - '+title);
             }
 
             let tags = article.head.tags;

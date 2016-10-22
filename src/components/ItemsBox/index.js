@@ -21,6 +21,7 @@ class ItemsBox extends React.Component {
     }
     componentWillReceiveProps(nextProps) {}
     componentDidMount() {
+        document.body.scrollTop = 0;
         if(this.refs.ul) {
             // this.refs.ul.style.visibility = 'hidden';
             setTimeout(()=> {

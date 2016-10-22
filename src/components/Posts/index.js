@@ -17,7 +17,9 @@ class Posts extends React.Component {
     }
     componentWillUpdate(nextProps, nextState, nextContext) {}
     componentWillReceiveProps(nextProps) {}
-    componentDidMount() {}
+    componentDidMount() {
+        document.body.scrollTop = 0;
+    }
     componentDidUpdate(prevProps, prevState) {
         // if(this.refs && this.refs.div) {
         //     this.refs.div.style.display='none';
@@ -32,7 +34,7 @@ class Posts extends React.Component {
 
         return (
             <div ref="div" className="tab active">
-                <ul>
+                <ul ref="ul" >
                     {
                         Array.isArray(posts)
                         && posts.map(post =>
