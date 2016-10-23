@@ -22,8 +22,7 @@ class Article extends React.Component {
     }
     componentDidMount() {
         if(this.refs.main) {
-
-            this.refs.ul.style.visibility = 'hidden';
+            this.refs.main.style.visibility = 'hidden';
             setTimeout(()=> {
                 this.refs.main.classList.add('animated')
                 this.refs.main.classList.add('fadeIn')
