@@ -32,7 +32,7 @@ class BigPic extends React.Component {
     componentWillUnmount() {}
     static defaultProps = {
         smText: 'welcome to',
-        lgText: 'Beijing',
+        lgText: 'Here de',
         showBack: false
     }
     static propTypes = {

@@ -7,6 +7,7 @@
     "bgUrl": "https://unsplash.it/2000/1200?image=1074"
   },
 
+  "tagPageSize": 12,
   "pageSize": 6,
   "summaryNumber": 100,
 

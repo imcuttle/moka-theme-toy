@@ -58,7 +58,7 @@ class App extends React.Component {
         let {bgColor, smText, lgText} = leftPic;
 
         
-        if(utils.isTagsPath(pathname)) {
+        if(utils.isTagsPath(pathname) && !utils.isTagsPagesPath(pathname)) {
             lgText = tagName;
             smText = 'TAG';
         }
@@ -115,7 +115,7 @@ class App extends React.Component {
         const {children, location, state, params, actions} = this.props;
         let {remote} = state;
         const {db, theme, moka} = remote;
-        let { title, summaryNumber, leftPic, icons, pageSize, profile, fillCovers, lazyLoadCover, iconTarget} = theme;
+        let { title, summaryNumber, leftPic, icons, pageSize, tagPageSize, profile, fillCovers, lazyLoadCover, iconTarget} = theme;
         const {main, index} = db;
         const {sorted, tagMap} = index;
         const {pathname} = location;
@@ -126,7 +126,7 @@ class App extends React.Component {
         }
         const bigPic = Object.assign({}, leftPic, state.bigPic, this.getBigPicText())
 
-        let links = ["/posts"+(pageSize!=null?'/1':''), "/tags"]
+        let links = ["/posts"+(pageSize!=null?'/1':''), "/tags"+(tagPageSize!=null?'/pages/1':'')]
         let start, end, prev, next;
 
         Array.isArray(fillCovers) && utils.fillCovers(main, fillCovers, lazyLoadCover)
@@ -138,7 +138,7 @@ class App extends React.Component {
                 page = 1;
             }
 
-            if(!!page && !isNaN(page) || page>0) {
+            if((!!page && !isNaN(page) || page>0) && pageSize>0) {
                 start = (page-1)*pageSize;
                 end = page * pageSize
             } else {
@@ -149,7 +149,7 @@ class App extends React.Component {
             if(start>0 && page>1) {
                 prev = '/posts/'+(page-1)
             }
-            if(end<=sorted.length) {
+            if(end<sorted.length) {
                 next = '/posts/'+(page-0+1)
             }
             const posts = sorted.slice(start, end)
@@ -176,27 +176,48 @@ class App extends React.Component {
                     </div>
                 ])
             )
-        } else if(utils.isTagsRootPath(pathname)) {
+        } else if(utils.isTagsRootPath(pathname) || utils.isTagsPagesPath(pathname)) {
             utils.setTitle('Tags - '+title);
-            const items = Object.keys(tagMap).map(tagName=>{
-                const hrefTitles = tagMap[tagName];
-                const x = hrefTitles.map(t=>main[t]).find(x=>{
-                    return !!x.head.cover
-                })
-                return {
-                    title: tagName,
-                    text: hrefTitles.length+' Posts',
-                    picUrl: !!x&&x.head.cover || '',
-                    href: '/tags/'+tagName
-                }
-            })
+            let items;
+            if(!index.tagItems) {
+                items = Object.keys(tagMap).map(tagName=>{
+                    const hrefTitles = tagMap[tagName];
+                    const x = hrefTitles.map(t=>main[t]).find(x=>{
+                        return !!x.head.cover
+                    })
+                    return {
+                        title: tagName,
+                        text: hrefTitles.length+' Posts',
+                        picUrl: !!x&&x.head.cover || '',
+                        href: '/tags/'+tagName
+                    }
+                });
+                index.tagItems = items;
+            } else {
+                items = index.tagItems;
+            }
+            if((!!page && !isNaN(page) || page>0 )&& tagPageSize>0) {
+                start = (page-1)*tagPageSize;
+                end = page * tagPageSize
+            } else {
+                start = 0;
+                end = items.length;
+                page = 1;
+            }
+            if(start>0 && page>1) {
+                prev = '/tags/pages/'+(page-1)
+            }
+            if(end<items.length) {
+                next = '/tags/pages/'+(page-0+1)
+            }
+
             let texts;
             let showBack = false;
-            if(!!this.state && utils.isTagsPath(this.state.pathname)) {
+            // debugger;
+            if(!!this.state && utils.isTagsPath(this.state.pathname) && !utils.isTagsPagesPath(this.state.pathname)) {
                 texts = [this.state.tagName, 'Tags']
-                links = ['/tags/'+this.state.tagName, '/tags']
+                links[0] = '/tags/'+this.state.tagName
                 showBack = true;
-                
             }
 
             return (
@@ -205,7 +226,8 @@ class App extends React.Component {
                     <div>
                         <Header active="1" links={links} texts={texts}/>
                         <div className="tab active">
-                            <ItemsBox items={items} btnText="View All" hoverHandler={a=>actions.setBigPicBg(a)}/>
+                            <ItemsBox items={items.slice(start, end)} btnText="View All" hoverHandler={a=>actions.setBigPicBg(a)}/>
+                            <Pagination next={next} prev={prev} />
                             <Footer icons={icons} method={iconTarget}/>
                         </div>
                     </div>
@@ -227,12 +249,13 @@ class App extends React.Component {
                     hrefTitle: t
                 }
             })
+            links[0] = '/tags/'+tagName
 
             return (
                 this.renderFrame([
                     <BigPic {...bigPic} showBack={true}/>,
                     <div>
-                        <Header active="0" links={['/tags/'+tagName, '/tags']} texts={[tagName, 'Tags']} />
+                        <Header active="0" links={links} texts={[tagName, 'Tags']} />
                         <div className="tab active">
                             <Posts posts={posts} hoverHandler={a=>actions.setBigPicBg(a)}/>
                             <Pagination prev={prev} next={next}/>
@@ -263,7 +286,6 @@ class App extends React.Component {
             if(!Array.isArray(tags)) {
                 tags = [tags]
             }
-            console.log(article.head);
 
             return (
                 <main>
@@ -318,7 +340,7 @@ class App extends React.Component {
                 pathname,
                 tagName
             })
-        } else if(!utils.isTagsRootPath(pathname)) {
+        } else if(!utils.isTagsRootPath(pathname) && !utils.isTagsPagesPath(pathname)) {
             this.setState({
                 pathname: null,
                 tagName: null

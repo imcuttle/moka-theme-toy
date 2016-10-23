@@ -26,6 +26,10 @@ module.exports = {
         return /^\/?tags\/?$/.test(pathname)
     },
 
+    isTagsPagesPath(pathname) {
+        return /^\/?tags\/pages\/\d+$/.test(pathname);
+    },
+
     isRootPath(pathname) {
         return pathname === '/'
     },
