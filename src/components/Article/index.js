@@ -22,12 +22,12 @@ class Article extends React.Component {
     }
     componentDidMount() {
         if(this.refs.main) {
-            this.refs.main.style.visibility = 'hidden';
+            // this.refs.main.style.visibility = 'hidden';
             setTimeout(()=> {
-                this.refs.main.classList.add('animated')
-                this.refs.main.classList.add('fadeIn')
-                this.refs.main.style.visibility = '';
-            }, 20)
+                this.refs.main.classList.remove('animated')
+                this.refs.main.classList.remove('fadeIn')
+                // this.refs.main.style.visibility = '';
+            }, 1300)
         }
     }
     componentWillUpdate(nextProps, nextState, nextContext) {
@@ -41,7 +41,7 @@ class Article extends React.Component {
         const {title, showBack, date, tags, cover, content, profile, method} = this.props;
 
         return (
-            <article ref="main">
+            <article ref="main" className="fadeIn animated">
                 <header className="section-padding--lg mast">
                 {
                     !!showBack &&
