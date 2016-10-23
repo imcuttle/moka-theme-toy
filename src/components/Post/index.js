@@ -23,7 +23,7 @@ class Post extends React.Component {
                     </span>
                     <h2 className="preview__header" itemProp="name">{title}</h2>
                     <p className="preview__excerpt" itemProp="description">
-                        {summary}
+                        {summary+'...'}
                     </p>
                     <span className="preview__more">Read More</span>
                 </Link>
