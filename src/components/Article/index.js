@@ -18,21 +18,31 @@ class Article extends React.Component {
     }
     componentWillMount() {
         document.body.scrollTop = 0;
+
+    }
+    componentDidMount() {
+        if(this.refs.main) {
+
+            this.refs.ul.style.visibility = 'hidden';
+            setTimeout(()=> {
+                this.refs.main.classList.add('animated')
+                this.refs.main.classList.add('fadeIn')
+                this.refs.main.style.visibility = '';
+            }, 20)
+        }
     }
     componentWillUpdate(nextProps, nextState, nextContext) {
 
     }
     componentDidUpdate(prevProps, prevState)  {
-        // setTimeout(() => {
-        //     document.body.scrollTop = document.body.clientHeight;
-        // }, 10)
+
     }
 
     render() {
         const {title, showBack, date, tags, cover, content, profile, method} = this.props;
 
         return (
-            <article className="animated fadeIn">
+            <article ref="main">
                 <header className="section-padding--lg mast">
                 {
                     !!showBack &&
