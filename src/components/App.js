@@ -28,10 +28,11 @@ class App extends React.Component {
             || !Map(this.props.state).equals(Map(nextProps.state));
     }
     componentWillUpdate(nextProps, nextState, nextContext) {
-        this.storeTagName(nextProps);
     }
     componentWillReceiveProps(nextProps) {
-
+        this.props.location.pathname != nextProps.location.pathname
+        && !(utils.isTagsPagesPath(this.props.location.pathname) && utils.isTagsPagesPath(nextProps.location.pathname))
+        && this.storeTagName();
     }
     componentWillMount() {
         // this.storeTagName();
@@ -213,7 +214,6 @@ class App extends React.Component {
 
             let texts;
             let showBack = false;
-            // debugger;
             if(!!this.state && utils.isTagsPath(this.state.pathname) && !utils.isTagsPagesPath(this.state.pathname)) {
                 texts = [this.state.tagName, 'Tags']
                 links[0] = '/tags/'+this.state.tagName
@@ -330,11 +330,9 @@ class App extends React.Component {
     }
 
     storeTagName(props=this.props) {
-
         const {location, params, actions} = props;
         const {pathname} = location;
         const {tagName} = params;
-
         if(utils.isTagsPath(pathname)) {
             this.setState({
                 pathname,
