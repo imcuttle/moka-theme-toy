@@ -83,7 +83,7 @@ class App extends React.Component {
     }
 
     render() {
-        console.log('App', this.props)
+        // console.log('App', this.props)
         return (
             <div>
                 {this.renderChild()}
@@ -130,7 +130,7 @@ class App extends React.Component {
         let links = ["/posts"+(pageSize!=null?'/1':''), "/tags"+(tagPageSize!=null?'/pages/1':'')]
         let start, end, prev, next;
 
-        Array.isArray(fillCovers) && utils.fillCovers(main, fillCovers, lazyLoadCover)
+        Array.isArray(fillCovers) && utils.fillCovers(sorted, main, fillCovers, lazyLoadCover)
 
         if(utils.isRootPath(pathname) || utils.isPostsPath(pathname)) {
             utils.setTitle('Posts - '+title);
@@ -181,11 +181,11 @@ class App extends React.Component {
             utils.setTitle('Tags - '+title);
             let items;
             if(!index.tagItems) {
-                items = Object.keys(tagMap).map(tagName=>{
+                items = Object.keys(tagMap).map(tagName => {
                     const hrefTitles = tagMap[tagName];
                     const x = hrefTitles.map(t=>main[t]).find(x=>{
-                        return !!x.head.cover
-                    })
+                        return !!x.head.cover && !x.head.fakeCover
+                    }) || main[hrefTitles[0]]
                     return {
                         title: tagName,
                         text: hrefTitles.length+' Posts',

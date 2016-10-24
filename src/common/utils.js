@@ -73,19 +73,21 @@ module.exports = {
         document.title = title;
     },
 
-    fillCovers(main, covers, lazy) {
+    fillCovers(sorted, main, covers, lazy) {
         if(covers.length===0) {
             return;
         }
         let c = 0;
-        Object.keys(main).forEach((href, i) => {
+        sorted.forEach((href, i) => {
             const item = main[href]
             // if(!item.innerText) {
             //     item.innerText = this.getInnerText(item.content);
             // }
             if(!item.head.cover) {
-                let match = item.content.match(/<img src="(.+?)".*?>/);
-                item.head.cover = match && match.length>1 && match[1] || covers[c++%covers.length]
+                let match = item.content.match(/<img src="(.+?)".*?>/g);
+                let isMatch = match && match.length>1
+                item.head.cover = isMatch && RegExp.$1 || covers[c++%covers.length]
+                item.head.fakeCover = !isMatch;
                 if(!lazy) {
                     new Image().src=item.head.cover
                 }
