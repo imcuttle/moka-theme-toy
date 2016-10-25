@@ -21,9 +21,15 @@ class ItemsBox extends React.Component {
     }
     componentWillReceiveProps(nextProps) {}
     componentDidMount() {
+        location.key = location.pathname;
         const {scroll} = this.props;
         if(scroll) {
             document.body.scrollTop = 0;
+        } else {
+            let text = sessionStorage['@@History/'+this.context.location.key]
+            if(!!text) {
+                document.body.scrollTop = JSON.parse(text).top
+            }
         }
         if(this.refs.ul) {
             // this.refs.ul.style.visibility = 'hidden';
@@ -36,9 +42,16 @@ class ItemsBox extends React.Component {
         }
     }
     componentDidUpdate(prevProps, prevState) {}
-    componentWillUnmount() {}
+    componentWillUnmount() {
+
+    }
     static defaultProps = {
         scroll: true
+    }
+
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+        location: React.PropTypes.object.isRequired
     }
     render() {
         const {items, btnText, hoverHandler, big} = this.props;
@@ -60,7 +73,9 @@ class ItemsBox extends React.Component {
                     {
                         items && items.map((item, i)=>
                             <article key={i} className="card">
-                            <Link className="card__link" to={item.href} itemProp="url">
+                            <Link onClick={e=>{
+                                this.context.router.setState({top: document.body.scrollTop});
+                            }} className="card__link" to={{pathname: item.href}} itemProp="url">
                                 <div className="card__img">
                                     <figure className="absolute-bg wow" 
                                     style={{
