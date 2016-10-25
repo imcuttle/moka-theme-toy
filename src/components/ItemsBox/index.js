@@ -21,7 +21,10 @@ class ItemsBox extends React.Component {
     }
     componentWillReceiveProps(nextProps) {}
     componentDidMount() {
-        document.body.scrollTop = 0;
+        const {scroll} = this.props;
+        if(scroll) {
+            document.body.scrollTop = 0;
+        }
         if(this.refs.ul) {
             // this.refs.ul.style.visibility = 'hidden';
             setTimeout(()=> {
@@ -34,6 +37,9 @@ class ItemsBox extends React.Component {
     }
     componentDidUpdate(prevProps, prevState) {}
     componentWillUnmount() {}
+    static defaultProps = {
+        scroll: true
+    }
     render() {
         const {items, btnText, hoverHandler, big} = this.props;
         if(!big) {

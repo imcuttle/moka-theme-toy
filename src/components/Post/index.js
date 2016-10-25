@@ -17,7 +17,7 @@ class Post extends React.Component {
             <li className="preview" itemProp="post" itemType="http://schema.org/BlogPosting"
                 onMouseEnter={hoverHandler && hoverHandler.bind(this, cover)}
             >
-                <Link to={"article/"+hrefTitle} className="preview__link" itemProp="url">
+                <Link to={"/article/"+hrefTitle} className="preview__link" itemProp="url">
                     <span className="preview__date" itemProp="datePublished" dateTime={date}>
                         {date}
                     </span>

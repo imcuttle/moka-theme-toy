@@ -18,7 +18,7 @@ class Footer extends React.Component {
         const {icons, method} = this.props;
         return (
             <footer className="section-padding--sm footer">
-                <Link className="footer__archive" to="archive">Archive</Link>
+                <Link className="footer__archive" to="/archive">Archive</Link>
                 <ul className="footer__social">
                     {
                         Array.isArray(icons) &&

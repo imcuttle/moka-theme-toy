@@ -30,6 +30,7 @@ class App extends React.Component {
     componentWillUpdate(nextProps, nextState, nextContext) {
     }
     componentWillReceiveProps(nextProps) {
+        this.setState({prevView: this.props.location.pathname})
         this.props.location.pathname != nextProps.location.pathname
         && !(utils.isTagsPagesPath(this.props.location.pathname) && utils.isTagsPagesPath(nextProps.location.pathname))
         && this.storeTagName();
@@ -113,6 +114,7 @@ class App extends React.Component {
     }
     
     renderChild() {
+        const {prevView} = this.state;
         const {children, location, state, params, actions} = this.props;
         let {remote} = state;
         const {db, theme, moka} = remote;
@@ -257,7 +259,7 @@ class App extends React.Component {
                     <div>
                         <Header active="0" links={links} texts={[tagName, 'Tags']} />
                         <div className="tab active">
-                            <Posts posts={posts} hoverHandler={a=>actions.setBigPicBg(a)}/>
+                            <Posts scroll={!!prevView&&(utils.isTagsRootPath(prevView)||utils.isTagsPagesPath(prevView))} posts={posts} hoverHandler={a=>actions.setBigPicBg(a)}/>
                             <Pagination prev={prev} next={next}/>
                             <Footer icons={icons} method={iconTarget}/>
                         </div>
@@ -309,7 +311,6 @@ class App extends React.Component {
                     href: '/article/'+href
                 }
             })
-
             return (
             <main>
             <section className="archives animated fadeIn">
@@ -321,7 +322,7 @@ class App extends React.Component {
                     <span>Archive</span>
                 </header>
                 
-                <ItemsBox big={true} btnText="Read Post" items={items} />
+                <ItemsBox big={true} scroll={!(!prevView||!!prevView&&utils.isArticlePath(prevView))} btnText="Read Post" items={items} />
             </section>
             </main>
             )

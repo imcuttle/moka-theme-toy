@@ -18,7 +18,10 @@ class Posts extends React.Component {
     componentWillUpdate(nextProps, nextState, nextContext) {}
     componentWillReceiveProps(nextProps) {}
     componentDidMount() {
-        document.body.scrollTop = 0;
+        const {scroll} = this.props;
+        if(scroll) {
+            document.body.scrollTop = 0;
+        }
     }
     componentDidUpdate(prevProps, prevState) {
         // if(this.refs && this.refs.div) {
@@ -29,6 +32,9 @@ class Posts extends React.Component {
         // }
     }
     componentWillUnmount() {}
+    static defaultProps = {
+        scroll: false
+    }
     render() {
         const {posts, hoverHandler} = this.props;
 
