@@ -322,7 +322,7 @@ class App extends React.Component {
                     <span>Archive</span>
                 </header>
                 
-                <ItemsBox big={true} scroll={!(!prevView||!!prevView&&utils.isArticlePath(prevView))} btnText="Read Post" items={items} />
+                <ItemsBox big={true} scroll={!(!!prevView&&utils.isArticlePath(prevView))} btnText="Read Post" items={items} />
             </section>
             </main>
             )

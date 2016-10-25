@@ -28,6 +28,7 @@ class ItemsBox extends React.Component {
         } else {
             let text = sessionStorage['@@History/'+this.context.location.key]
             if(!!text) {
+                debugger;
                 document.body.scrollTop = JSON.parse(text).top
             }
         }
