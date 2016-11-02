@@ -146,7 +146,6 @@ ol,
 ul {
   margin: 0;
   padding: 0;
-  list-style-type: none
 }
 ::-moz-selection {
   color: #fff;
@@ -683,13 +682,15 @@ section {
     padding-left: 25px;
     line-height: 1.6;
     list-style: inherit;
-
     li:first-child {
       margin-top: 15px;
     }
     li {
       margin-bottom: 15px;
     }
+  }
+  ol {
+    list-style: decimal;
   }
 
   table {
@@ -726,7 +727,7 @@ code, kbd, pre, samp {
 a>code, figcaption>code, li>code, p>code, td>code, h1>code,h2>code,h3>code, h4>code, h5> code {
     margin-left: 3px;
     margin-right: 3px;
-    padding: .2rem .2rem;
+    padding: .1rem .2rem;
     vertical-align: middle;
     font-size: .9em;
     border-radius: 2px;
