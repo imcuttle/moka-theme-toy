@@ -24,11 +24,12 @@ class Header extends React.Component {
         const {active, texts} = this.props;
 
         return (
-            <header>
+            <header style={{position: 'relative'}}>
                 <ul className="tabs">
                     <li onClick={this.switchHeader.bind(this, 0)} className={"tabs__item "+(active==0?"active":"")}>{texts && texts[0]||'Posts'}</li>
                     <li onClick={this.switchHeader.bind(this, 1)} className={"tabs__item "+(active==1?"active":"")}>{texts && texts[1]||'Tags'}</li>
                 </ul>
+                {/*<div className="searchbox"><input type="text" placeholder="Search..."/></div>*/}
             </header>
         )
     }

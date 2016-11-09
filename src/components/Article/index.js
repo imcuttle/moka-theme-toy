@@ -65,7 +65,7 @@ class Article extends React.Component {
                         </ul>
                     </div>
                 </header>
-                <section className="section-padding post animated fadeIn" dangerouslySetInnerHTML={{__html: content}}></section>
+                <section className="section-padding markdown-body animated fadeIn" dangerouslySetInnerHTML={{__html: content}}></section>
                 {
                     !!profile &&
                     <section className="profile">
