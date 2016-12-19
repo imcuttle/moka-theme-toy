@@ -6,6 +6,15 @@ var minimize = process.argv.indexOf('--mini') !== -1;
 
 
 var config = {
+    devServer: {
+        proxy: {
+            '/moka_api': {
+                changeOrigin: true,
+                target: 'https://moyuyc.github.io/',
+                secure: false
+            }
+        }
+    },
     entry: {
         app: [
             'babel-polyfill',

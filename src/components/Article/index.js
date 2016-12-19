@@ -21,14 +21,14 @@ class Article extends React.Component {
 
     }
     componentDidMount() {
-        if(this.refs.main) {
-            // this.refs.main.style.visibility = 'hidden';
-            setTimeout(()=> {
+        // this.refs.main.style.visibility = 'hidden';
+        setTimeout(()=> {
+            if(this.refs.main) {
                 this.refs.main.classList.remove('animated')
                 this.refs.main.classList.remove('fadeIn')
-                // this.refs.main.style.visibility = '';
-            }, 1300)
-        }
+            }
+            // this.refs.main.style.visibility = '';
+        }, 1300)
     }
     componentWillUpdate(nextProps, nextState, nextContext) {
 
