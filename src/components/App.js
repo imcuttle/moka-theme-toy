@@ -267,7 +267,6 @@ class App extends React.Component {
                 ])
             )
         } else if(utils.isArticlePath(pathname)) {
-
             let article = main[hrefTitle];
             if(profile) {
                 profile.icons = icons;
@@ -275,13 +274,13 @@ class App extends React.Component {
 
             let nextdata;
             const i = sorted.indexOf(hrefTitle)
-            if(i>=0 && i!=sorted.length-1) {
+            if(i>=0) {
                 utils.setTitle(main[sorted[i]].head.title +' - '+title);
-                nextdata = {
+                nextdata = i!=sorted.length-1 ? {
                     title: main[sorted[i+1]].head.title,
                     cover: main[sorted[i+1]].head.cover,
                     href: '/article/'+sorted[i+1]
-                }
+                }: null
             }
 
             let tags = article.head.tags;
@@ -296,7 +295,7 @@ class App extends React.Component {
                         tags={tags} cover={article.head.cover} content={article.content}
                         profile={profile} method={iconTarget}
                     />
-                    <ArtNext {...nextdata}/>
+                    {nextdata && <ArtNext {...nextdata}/>}
                 </main>
             )
         } else {
