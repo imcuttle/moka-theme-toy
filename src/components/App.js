@@ -237,12 +237,13 @@ class App extends React.Component {
             )
         } else if(utils.isTagsPath(pathname)) {
             utils.setTitle(tagName +' - '+title);
+            
             const map = tagMap[tagName].reduce((p, n) => {
                 p[n] = main[n];
                 return p;
             }, {})
             utils.setMainSummary(map);
-            const posts = Object.keys(map).map(t=>{
+            const posts = tagMap[tagName].map(t=>{
                 return {
                     title: map[t].head.title,
                     date: map[t].head.date,
