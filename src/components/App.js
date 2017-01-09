@@ -30,20 +30,36 @@ class App extends React.Component {
     componentWillUpdate(nextProps, nextState, nextContext) {
     }
     componentWillReceiveProps(nextProps) {
+        const {params, state, location} = nextProps;
+        const {router} = this.context;
+        const {remote} = state;
+        const {db, theme, moka} = remote;
+
         this.setState({prevView: this.props.location.pathname})
         this.props.location.pathname != nextProps.location.pathname
         && !(utils.isTagsPagesPath(this.props.location.pathname) && utils.isTagsPagesPath(nextProps.location.pathname))
         && this.storeTagName();
+
+        if(params.tagName && utils.isTagsPath(location.pathname) && !db.index.tagMap[params.tagName] ||
+            params.hrefTitle && utils.isArticlePath(location.pathname) && !db.main[params.hrefTitle] ) {
+            router.push('/posts');
+        }
     }
     componentWillMount() {
         // this.storeTagName();
-        const {actions} = this.props;
+        const {actions, params} = this.props;
         const {pathname} = this.props.location;
         const {tagName} = this.props.params;
         const {remote} = this.props.state;
-        const {theme} = remote;
+        const {router} = this.context;
+        const {theme, db} = remote;
         const {leftPic, icons} = theme;
         let {bgColor, smText, lgText} = leftPic;
+
+        if(params.tagName && utils.isTagsPath(pathname) && !db.index.tagMap[params.tagName] ||
+            params.hrefTitle && utils.isArticlePath(pathname) && !db.main[params.hrefTitle] ) {
+            router.push('/posts');
+        }
 
         // !!icons && Array.isArray(icons) && actions.setIcons(icons)
     }
@@ -114,6 +130,7 @@ class App extends React.Component {
     }
     
     renderChild() {
+        const {router} = this.context;
         const {prevView} = this.state;
         const {children, location, state, params, actions} = this.props;
         let {remote} = state;
@@ -237,7 +254,9 @@ class App extends React.Component {
             )
         } else if(utils.isTagsPath(pathname)) {
             utils.setTitle(tagName +' - '+title);
-            
+            if(!tagMap[tagName]) {
+                return;
+            }
             const map = tagMap[tagName].reduce((p, n) => {
                 p[n] = main[n];
                 return p;
@@ -269,6 +288,9 @@ class App extends React.Component {
             )
         } else if(utils.isArticlePath(pathname)) {
             let article = main[hrefTitle];
+            if(!article) {
+                return;
+            }
             if(profile) {
                 profile.icons = icons;
             }
