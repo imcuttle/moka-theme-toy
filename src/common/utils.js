@@ -2,12 +2,16 @@
  * Created by Moyu on 16/10/20.
  */
 import fetch from 'isomorphic-fetch'
-
+const moka = window.__moka__ || {};
 
 module.exports = {
     remotePromise() {
+        const md5 = moka.md5 || {};
+
         return Promise.all([
-            'moka_api/db.json', 'moka_api/moka.config.json', 'moka_api/theme.config.json'
+            'moka_api/db.json?k='+(md5.dbMd5 || ''), 
+            'moka_api/moka.config.json?k='+(md5.mokaConfigMd5 || ''), 
+            'moka_api/theme.config.json?k='+(md5.themeConfigMd5 || '')
         ].map(r=>fetch(r).then(res=>res.json())))
         .then(reses=>{
             return {
