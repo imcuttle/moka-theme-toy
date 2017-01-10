@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Toy</title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="print" href="print.css?v=1484072982684">
-    <script type="text/javascript" src="pace.js?v=1484072982684"></script>
+    <link rel="stylesheet" type="text/css" media="print" href="print.css?v=<%= htmlWebpackPlugin.options.key %>">
+    <script type="text/javascript" src="pace.js?v=<%= htmlWebpackPlugin.options.key %>"></script>
     <style>
         .pace {
           -webkit-pointer-events: none;
@@ -92,5 +92,5 @@
 <!-- <script type="text/javascript" src="client.main.min.js"></script> -->
 <!--<script type="text/javascript" src="dev.main.min.js"></script>-->
 <!--<script src="webpack-dev-server.js"></script>-->
-<script type="text/javascript" src="libs.min.js?v=cf9b44da9ab6d237&d85df459f1a7b43878d5"></script><script type="text/javascript" src="app.min.js?v=4c81156348c40693&d85df459f1a7b43878d5"></script></body>
+</body>
 </html>
