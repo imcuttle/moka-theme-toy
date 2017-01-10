@@ -21,12 +21,17 @@ var config = {
             path.resolve(__dirname, 'src/main.js'),
             // 'webpack/hot/only-dev-server'
         ],
+        libs: [
+            'react', 'react-router', 'react-dom',
+            'immutable', 'redux', 'react-redux', 'react-router-redux',
+            'isomorphic-fetch', 'classname'
+        ]
         // client: "webpack-dev-server/client?http://localhost:8080/",
         // dev: "webpack/hot/only-dev-server"
     },
     output:{
         path: path.resolve(__dirname, 'build'),
-        filename: '[name].main.min.js',
+        filename: '[name].min.js',
         publicPath: '/',
         // hotUpdateChunkFilename: 'hot/hot-update.js',
         // hotUpdateMainFilename: 'hot/hot-update.json'
@@ -34,6 +39,7 @@ var config = {
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),  //fix Maximum call stack
+        new webpack.optimize.CommonsChunkPlugin('libs', 'libs.js?v=[hash]-[id]')
         //new webpack.optimize.CommonsChunkPlugin('react', 'react.js')
     ],
     module: {
