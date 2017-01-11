@@ -7,6 +7,7 @@ var minimize = process.argv.indexOf('--mini') !== -1;
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
+
 var config = {
     devServer: {
         proxy: {
@@ -28,28 +29,25 @@ var config = {
             'immutable', 'redux', 'react-redux', 'react-router-redux',
             'isomorphic-fetch', 'classname'
         ]
-        // client: "webpack-dev-server/client?http://localhost:8080/",
-        // dev: "webpack/hot/only-dev-server"
     },
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: '[name].min.js?v=[chunkhash:16]',
+        filename: '[name].min.js?v=[chunkhash]',
         publicPath: '',
         // hotUpdateChunkFilename: 'hot/hot-update.js',
         // hotUpdateMainFilename: 'hot/hot-update.json'
     },
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.CommonsChunkPlugin('libs', 'libs.min.js?v=[chunkhash:16]'),
+        new webpack.optimize.CommonsChunkPlugin('libs', 'libs.min.js?v='+(minimize?"[chunkhash]":"[hash]")),
+        new WebpackMd5Hash(),
         new HtmlWebpackPlugin({
             title: 'Toy',
             filename: 'index.html',
             key: Date.now(),
             // minify: true,
-            template: 'src/index.tpl.html',
-            hash: true
+            template: 'src/index.tpl.html'
         })
-        //new webpack.optimize.CommonsChunkPlugin('react', 'react.js')
     ],
     module: {
         loaders: [
