@@ -79,10 +79,36 @@ module.exports = {
         document.title = title;
     },
 
+
+
     loaded() {
-        loadEl = loadEl || document.getElementById('loading');
-        loadEl.style.display = 'none';
-        // loadEl.classList.add('fadeOut');
+        loadEl = loadEl || document.getElementById('loading-container');
+        var transitionEvent = whichTransitionEvent();
+        if(!transitionEvent)
+            loadEl.style.display = 'none';
+        else {
+            loadEl.addEventListener(transitionEvent, function (e) {
+                // not work
+                e.target.removeEventListener(transitionEvent, arguments.callee, false);
+                loadEl.style.display = 'none';
+            }, false);
+            loadEl.classList.add('fadeOut');
+        }
+        function whichTransitionEvent() {
+            var t,
+                el = document.createElement('surface'),
+                transitions = {
+                    'transition':'transitionend',
+                    'OTransition':'oTransitionEnd',
+                    'MozTransition':'transitionend',
+                    'WebkitTransition':'webkitTransitionEnd'
+                }
+           for(t in transitions) {
+               if( el.style[t] !== undefined ){
+                   return transitions[t];
+               }
+           }
+        }
     },
 
     sleep(ms) {
