@@ -5,7 +5,7 @@ var webpack = require('webpack');
 var node_module_dir = path.resolve(__dirname, 'node_module');
 var minimize = process.argv.indexOf('--mini') !== -1;
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 
 var config = {
@@ -40,6 +40,7 @@ var config = {
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.optimize.CommonsChunkPlugin('libs', 'libs.min.js?v='+(minimize?"[chunkhash]":"[hash]")),
+        new ExtractTextPlugin("styles.min.css?v=[contenthash]", {allChunks: true}),
         new WebpackMd5Hash(),
         new HtmlWebpackPlugin({
             title: 'Toy',
@@ -51,6 +52,10 @@ var config = {
     ],
     module: {
         loaders: [
+            { 
+                test: /\.text\.less$/, 
+                loader: ExtractTextPlugin.extract(['css-loader', 'postcss', 'less'])
+            },
             {
                 loaders: [
                     // "react-hot/webpack",
@@ -65,7 +70,7 @@ var config = {
                 test:/\.jsx?$/
             },
 		    {
-			    test: /\.less$/,
+			    test: /^(.(?!\.text))*\.less$/,
 		    	loader: 'style-loader!css-loader' +
                 '!postcss!less-loader'
 		    },

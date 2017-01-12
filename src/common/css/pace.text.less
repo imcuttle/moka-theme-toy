@@ -1,3 +1,5 @@
+@import './constant.less';
+
 .pace {
   -webkit-pointer-events: none;
   pointer-events: none;
@@ -17,7 +19,7 @@
   top: 0;
   right: 100%;
   width: 100%;
-  height: 2px;
+  height: 2.3px;
 }
 
 .pace .pace-progress-inner {
@@ -26,7 +28,7 @@
   right: 0px;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px #9f8f68, 0 0 5px #9f8f68;
+  box-shadow: 0 0 10px @baseColor, 0 0 5px @baseColor;
   opacity: 1.0;
   -webkit-transform: rotate(3deg) translate(0px, -4px);
   -moz-transform: rotate(3deg) translate(0px, -4px);
@@ -45,8 +47,8 @@
   height: 14px;
   box-sizing: content-box;
   border: solid 2px transparent;
-  border-top-color: #9f8f68;
-  border-left-color: #9f8f68;
+  border-top-color: @baseColor;
+  border-left-color: @baseColor;
   border-radius: 10px;
   -webkit-animation: pace-spinner 400ms linear infinite;
   -moz-animation: pace-spinner 400ms linear infinite;

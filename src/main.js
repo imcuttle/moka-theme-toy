@@ -17,6 +17,7 @@ import Posts from './components/Posts'
 import Article from './components/Article'
 import ItemsBox from './components/ItemsBox'
 import './common/css/main.less'
+import './common/css/pace.text.less'
 import utils from './common/utils'
 
 
