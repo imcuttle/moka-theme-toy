@@ -17,11 +17,14 @@ body {
 
 @font-face{font-family:'LiberationMonoRegular';src:url("fonts/liberation-mono-webfont.eot");src:url("fonts/liberation-mono-webfont.eot?#iefix") format("embedded-opentype"),url("fonts/liberation-mono-webfont.woff") format("woff"),url("fonts/liberation-mono-webfont.ttf") format("truetype"),url("fonts/liberation-mono-webfont.svg#LiberationMonoRegular") format("svg");font-weight:normal;font-style:normal}
 
-.markdown-body iframe {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 50%;
-  transform: translateX(-50%);
+.markdown-body {
+  iframe, embed, img {
+    display: block;
+    width: auto;
+    height: auto;
+    margin: 10px auto 8px;
+    max-width: 100%;
+  }
 }
 
 .example-enter {
