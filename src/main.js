@@ -17,7 +17,7 @@ import Posts from './components/Posts'
 import Article from './components/Article'
 import ItemsBox from './components/ItemsBox'
 import './common/css/main.less'
-import './common/css/pace.text.less'
+import './common/css/loading.text.less'
 import utils from './common/utils'
 
 
@@ -35,22 +35,25 @@ utils.remotePromise()
             // loggerMiddleware // 一个很便捷的 middleware，用来打印 action 日志
         )
     )
-    console.log('remote', remote)
-    render((
-        <Provider store={store}>
-            <Router history={ useRouterHistory(createHashHistory)({ queryKey: false }) }>
-                <Route path="/" component={App}>
-                    <IndexRoute component={Posts}/>
-                    <Route path="posts(/:page)" component={Posts}></Route>
-                    <Route path="article(/:hrefTitle)" component={Article}></Route>
-                    <Route path="tags(/:tagName)" component={ItemsBox}></Route>
-                    <Route path="tags/pages/:page" component={ItemsBox}></Route>
-                    <Route path="archive" component={ItemsBox}></Route>
-                    <Route path="*" onEnter={(loc, replace)=>{replace('/')}} />
-                </Route>
+    utils.sleep(200)
+    .then(() => {
+        console.log('remote', remote);
+        render((
+            <Provider store={store}>
+                <Router history={ useRouterHistory(createHashHistory)({ queryKey: false }) }>
+                    <Route path="/" component={App}>
+                        <IndexRoute component={Posts}/>
+                        <Route path="posts(/:page)" component={Posts}></Route>
+                        <Route path="article(/:hrefTitle)" component={Article}></Route>
+                        <Route path="tags(/:tagName)" component={ItemsBox}></Route>
+                        <Route path="tags/pages/:page" component={ItemsBox}></Route>
+                        <Route path="archive" component={ItemsBox}></Route>
+                        <Route path="*" onEnter={(loc, replace)=>{replace('/')}} />
+                    </Route>
 
-            </Router>
+                </Router>
 
-        </Provider>
-    ), document.getElementById('app'))
+            </Provider>
+        ), document.getElementById('app'))
+    });
 })

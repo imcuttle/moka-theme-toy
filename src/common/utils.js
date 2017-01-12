@@ -4,6 +4,8 @@
 import fetch from 'isomorphic-fetch'
 const moka = window.__moka__ || {};
 
+var loadEl;
+
 module.exports = {
     remotePromise() {
         const md5 = moka.md5 || {};
@@ -76,6 +78,21 @@ module.exports = {
     setTitle(title) {
         document.title = title;
     },
+
+    loaded() {
+        loadEl = loadEl || document.getElementById('loading');
+        loadEl.style.display = 'none';
+        // loadEl.classList.add('fadeOut');
+    },
+
+    sleep(ms) {
+        return new Promise(resolve => {
+            setTimeout(()=> {
+                resolve();
+            }, ms);
+        })
+    },
+
 
     fillCovers(sorted, main, covers, lazy) {
         if(covers.length===0) {

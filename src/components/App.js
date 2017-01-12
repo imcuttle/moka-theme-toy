@@ -45,6 +45,9 @@ class App extends React.Component {
             router.push('/posts');
         }
     }
+    componentDidMount() {
+        utils.loaded();
+    }
     componentWillMount() {
         // this.storeTagName();
         const {actions, params} = this.props;
