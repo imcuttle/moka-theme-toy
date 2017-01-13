@@ -79,20 +79,30 @@ module.exports = {
         document.title = title;
     },
 
-
+    isIE () {
+      var myNav = navigator.userAgent.toLowerCase();
+      return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
+    },
 
     loaded() {
-        loadEl = loadEl || document.getElementById('loading-container');
+        var isie = this.isIE();
+        loadEl = loadEl || document.getElementById(isie?'loading':'loading-container');
         var transitionEvent = whichTransitionEvent();
         if(!transitionEvent)
             loadEl.style.display = 'none';
         else {
-            loadEl.addEventListener(transitionEvent, function (e) {
-                // not work
-                e.target.removeEventListener(transitionEvent, arguments.callee, false);
+            loadEl.addEventListener(transitionEvent, function func(e) {
+                e.target.removeEventListener(transitionEvent, func, false);
                 loadEl.style.display = 'none';
             }, false);
-            loadEl.classList.add('fadeOut');
+            if(isie) {
+                // ie, set loading element opacity, trigger transitionend event;
+                loadEl.style.opacity = 0;
+            } else {
+                // not ie, loading-container height=0, fadeOuted , then children will hide
+                // better performance
+                loadEl.classList.add('fadeOut');
+            }
         }
         function whichTransitionEvent() {
             var t,
