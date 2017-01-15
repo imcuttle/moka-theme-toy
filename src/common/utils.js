@@ -70,9 +70,16 @@ module.exports = {
             //     item.innerText = this.getInnerText(item.content);
             // }
             if(!item.summary) {
-                item.summary = this.getInnerText(item.content).slice(0, num)
+                item.pureText = this.getInnerText(item.content);
+                item.summary = item.pureText.slice(0, num);
             }
         })
+    },
+
+    testWord (searchWord, text) {
+        searchWord = searchWord.trim();
+        if(!searchWord) return false;
+        return text.search(new RegExp(searchWord, 'i')) >= 0;
     },
 
     setTitle(title) {

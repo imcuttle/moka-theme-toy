@@ -204,6 +204,44 @@ ul {
   text-transform: uppercase;
   color: #000;
 }
+.serach-div {
+  margin-top: 10px;
+  text-align: center;
+  font-family: "weblysleek_uilight", "Source Code Pro", Sana, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  letter-spacing: 0.05em;
+  input {
+    color: #000;
+    font: inherit;
+    transition: border .34s ease, width .34s ease;
+    width: 26%;
+    min-width: 120px;
+    padding: .3rem 1rem;
+    border: none;
+    border-bottom: 2px solid @hoverColor;
+    outline: none;
+    background-color: transparent;
+    &:focus {
+      width: 80%;
+      border-color: @baseColor;
+    }
+  }
+}
+.archives_right {
+  // .fa-lg;
+  // line-height: .75em;
+  border: none;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  span {
+    
+  }
+  i {
+    display: none;
+  }
+}
 .previews>*:first-child:after,
 .card__img:after,
 .mast:after,
@@ -620,6 +658,20 @@ section {
 @media (min-width: 30em) {
   .nav {
     left: 2em
+  }
+  .serach-div {
+    input:focus {
+      width: 50%;
+      border-color: @baseColor;
+    }
+  }
+  .archives_right {
+    top: 1.25em!important;
+    right: 2.3em!important;
+    i {
+      margin-left: 0.3em;
+      display: inline-block;
+    }
   }
 }
 @media (min-width: 30em) {

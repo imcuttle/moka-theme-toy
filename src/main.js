@@ -48,7 +48,7 @@ utils.remotePromise()
                         <Route path="article(/:hrefTitle)" component={Article}></Route>
                         <Route path="tags(/:tagName)" component={ItemsBox}></Route>
                         <Route path="tags/pages/:page" component={ItemsBox}></Route>
-                        <Route path="archive" component={ItemsBox}></Route>
+                        <Route path="archive(/:searchKey)" component={ItemsBox}></Route>
                         <Route path="*" onEnter={(loc, replace)=>{replace('/')}} />
                     </Route>
 

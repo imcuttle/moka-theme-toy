@@ -142,7 +142,7 @@ class App extends React.Component {
         const {main, index} = db;
         const {sorted, tagMap} = index;
         const {pathname} = location;
-        let {hrefTitle, tagName, page} = params;
+        let {hrefTitle, tagName, page, searchKey} = params;
         
         if(!state.bigPic.bgUrl) {
             delete state.bigPic.bgUrl;
@@ -326,8 +326,27 @@ class App extends React.Component {
             )
         } else {
             utils.setTitle('Archive - '+title);
-
-            const items = sorted.map(href=>{
+            const words = searchKey && searchKey.split(/[ +]/);
+            let items = sorted;
+            if(Array.isArray(words)) {
+                utils.setMainSummary(main, summaryNumber-0);
+                const priority = {}
+                items = items.filter(href => {
+                    const item = main[href];
+                    return words.every(w => {
+                        if(utils.testWord(w, item.head.title)) {
+                            priority[href] = 1;
+                            return true;
+                        } 
+                        if(utils.testWord(w, item.pureText)) {
+                            priority[href] = 2;
+                            return true;
+                        }
+                    })
+                })
+                .sort((a, b) => priority[a] === priority[b] ? (sorted.indexOf(a) - sorted.indexOf(b)) : (priority[a] - priority[b]))
+            }
+            items = items.map(href=>{
                 const item = main[href];
                 return {
                     picUrl: item.head.cover,
@@ -343,10 +362,22 @@ class App extends React.Component {
                   <i className="fa fa-lg fa-arrow-left"></i>
                   <span>Back to Posts</span>
                 </Link>
+                <span className="archives_right">
+                    <span>{ items.length }</span>
+                    <i className="fa fa-lg fa-file-text"></i>
+                </span>
                 <header className="archives__header">
-                    <span>Archive</span>
+                    <span>{'Archive'}</span>
                 </header>
-                
+                <div className="serach-div">
+                    <input placeholder="Serach..." defaultValue={searchKey} spellCheck={false} autoCorrect='off'
+                        onFocus={() => utils.setMainSummary(main, summaryNumber-0)}
+                        onChange={e=>{
+                            utils.setMainSummary(main, summaryNumber-0);
+                            router.push('/archive/'+encodeURIComponent(e.target.value.trim()));
+                        }}
+                    />
+                </div>
                 <ItemsBox big={true} scroll={!(!!prevView&&utils.isArticlePath(prevView))} btnText="Read Post" items={items} />
             </section>
             </main>
