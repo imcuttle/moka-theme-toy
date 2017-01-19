@@ -102,6 +102,7 @@ if(minimize) {
         new webpack.NoErrorsPlugin()
     )
 } else {
+    config.devtool = 'source-map'
     config.plugins.push (
         new webpack.HotModuleReplacementPlugin()  //fix Maximum call stack
     )

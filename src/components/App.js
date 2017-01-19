@@ -16,6 +16,7 @@ import Pagination from './Pagination'
 import Footer from './Footer'
 import ArtNext from './ArtNext'
 import utils from '../common/utils'
+import Duoshuo from './Duoshuo'
 
 class App extends React.Component {
     constructor(props) {
@@ -46,6 +47,12 @@ class App extends React.Component {
         }
     }
     componentDidMount() {
+        const {children, location, state, params, actions} = this.props;
+        let {remote} = state;
+        const {db, theme, moka} = remote;
+        window.duoshuoQuery = {
+          short_name: theme.duoshuo
+        };
         utils.loaded();
     }
     componentWillMount() {
@@ -314,6 +321,9 @@ class App extends React.Component {
                 tags = [tags]
             }
 
+            const articleUrl = theme.host +'/'+''
+            const shortName = theme.duoshuo;
+
             return (
                 <main>
                     <Article 
@@ -321,6 +331,15 @@ class App extends React.Component {
                         tags={tags} cover={article.head.cover} content={article.content}
                         profile={profile} method={iconTarget}
                     />
+                    {
+                        shortName && 
+                        <Duoshuo
+                            thread={hrefTitle}
+                            url={articleUrl}
+                            title={article.head.title}
+                            author={moka.author || ''}
+                            domain={shortName} />
+                    }
                     {nextdata && <ArtNext {...nextdata}/>}
                 </main>
             )

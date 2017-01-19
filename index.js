@@ -4,10 +4,11 @@ var webpack = require('webpack');
 
 var config = require("./webpack.config.js");
 
-config.entry.app.unshift("webpack-dev-server/client?http://localhost:8080/", "webpack/hot/only-dev-server");
+config.entry.app.unshift("webpack-dev-server/client?http://0.0.0.0:8080/", "webpack/hot/only-dev-server");
 
 var compiler = webpack(config);
 var server = new webpackDevServer(compiler, {
+    proxy: config.devServer.proxy,
     hot: true,
     contentBase: './build',
     inline: true,

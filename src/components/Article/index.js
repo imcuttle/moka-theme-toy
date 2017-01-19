@@ -58,6 +58,7 @@ class Article extends React.Component {
                         <h1>{title}</h1>
                         <ul className="tags">
                             {tags && tags.map(tag => 
+                                tag && 
                                 <li key={tag}>
                                     <Link to={"/tags/"+tag}>{tag}</Link>
                                 </li>

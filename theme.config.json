@@ -42,5 +42,8 @@
     "https://unsplash.it/2000/1200?image=1003",
     "https://unsplash.it/2000/1200?image=16"
   ],
-  "lazyLoadCover": false
+  "lazyLoadCover": false,
+
+  "duoshuo": "",
+  "host": "https://moyuyc.oschina.io"
 }
