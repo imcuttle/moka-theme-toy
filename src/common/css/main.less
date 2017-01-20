@@ -5,6 +5,7 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: @bodyFontFamily;
 }
 
 @font-face {
@@ -102,7 +103,7 @@ pre {
   box-sizing: border-box
 }
 body {
-  font-family: "weblysleek_uilight", "Source Code Pro", Sana, -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+  // font-family: "weblysleek_uilight", "Source Code Pro", Sana, -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
   -webkit-font-feature-settings: 'liga' 0;
   font-feature-settings: 'liga' 0;
   font-size: 100%;
@@ -141,7 +142,6 @@ body {
 h1,
 h2 {
   margin: 0;
-  font-family: "weblysleek_uilight", "Source Code Pro", Sana, -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
   font-weight: normal;
 }
 @media (min-width: 54em) {
@@ -199,7 +199,7 @@ ul {
 .nav,
 .next__container span,
 .archives__header {
-  font-family: "weblysleek_uilight", "Source Code Pro", Sana, -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+  // font-family: "weblysleek_uilight", "Source Code Pro", Sana, -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #000;
@@ -207,7 +207,7 @@ ul {
 .serach-div {
   margin-top: 10px;
   text-align: center;
-  font-family: "weblysleek_uilight", "Source Code Pro", Sana, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  // font-family: "weblysleek_uilight", "Source Code Pro", Sana, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   letter-spacing: 0.05em;
   input {
     color: #000;
@@ -378,7 +378,6 @@ section {
   color: #fff
 }
 .previews__container span {
-  font-family: "weblysleek_uilight", "Source Code Pro", Sana, -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
   color: #fff;
 }
 .preview {
@@ -423,7 +422,7 @@ section {
 }
 
 .preview__date {
-  font-family: "weblysleek_uilight", "Source Code Pro", Sana, -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+  
   color: #0a0a0a
 }
 .preview__header {
@@ -436,7 +435,6 @@ section {
 .preview__more {
   display: inline-block;
   padding: .5em;
-  font-family: "weblysleek_uilight", "Source Code Pro", Sana, -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
   color: @baseColor;
   border: 3px solid @baseColor;
   box-shadow: inset 0 0 0 0 @baseColor;
@@ -528,7 +526,6 @@ section {
 .card__more {
   display: inline-block;
   padding: .25em;
-  font-family: "weblysleek_uilight", "Source Code Pro", Sana, -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
   color: @baseColor;
   border: 3px solid @baseColor;
   box-shadow: inset 0 0 0 0 @baseColor;
@@ -653,7 +650,6 @@ section {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-family: "weblysleek_uilight", "Source Code Pro", Sana, -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
 }
 @media (min-width: 30em) {
   .nav {
@@ -707,7 +703,7 @@ section {
   width: 90%;
   max-width: 54em;
   margin: 0 auto;
-  font-family: "weblysleek_uilight", "Source Code Pro", Sana, -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+
 }
 @media (min-width: 54em) {
   .post {
@@ -804,19 +800,21 @@ section {
 }
 
 code, kbd, pre, samp {
-  font-family: "Droid Sans Mono",Consolas,"Liberation Mono","Lucida Console",monospace;
+  font-family: @mdCodeFontFamily;
 }
+// .markdown-body {
 a>code, figcaption>code, li>code, p>code, td>code, h1>code,h2>code,h3>code, h4>code, h5> code {
-    margin-left: 3px;
-    margin-right: 3px;
+    margin-left: 3px!important;
+    margin-right: 3px!important;
     padding: .1rem .2rem;
     vertical-align: middle;
     font-size: .9em;
     border-radius: 2px;
     background-color: #eae9f2;
-    font-family: weblysleek_uilight,-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+    // font-family: weblysleek_uilight,-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
     // color: rgba(10, 4, 10, 0.9);
 }
+// }
 .post h4 {
   font-size: 1.5em;
 }
@@ -956,7 +954,7 @@ img.emoji {
 }
 .next__container span {
   color: #fff;
-  font-family: "weblysleek_uilight",  "Source Code Pro", Sana, -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+  // font-family: "weblysleek_uilight",  "Source Code Pro", Sana, -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
 }
 .archives__header {
   padding: 1em;
@@ -1074,14 +1072,14 @@ img.emoji {
       -webkit-text-size-adjust: 100%;
       color: #333;
       overflow: hidden;
-      font-family: -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
-      font-size: 16px;
+      font-family: @mdFontFamily;
+      font-size: 16.5px;
       line-height: 1.6;
       word-wrap: break-word;
     }
 
     .preview__excerpt {
-      font-family: -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+      font-family: @mdFontFamily;
     }
     .markdown-body ul {
       list-style-type: disc;
@@ -1273,14 +1271,14 @@ img.emoji {
     }
 
     .markdown-body code {
-      font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      font-family: @mdCodeFontFamily;
       font-size: 12px;
     }
 
     .markdown-body pre {
       margin-top: 5px!important;
       margin-bottom: 0;
-      font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      font-family: @mdCodeFontFamily;
       font-size: 12px;
     }
 
@@ -1295,7 +1293,7 @@ img.emoji {
       padding: 3px 5px;
       line-height: 10px;
       font-size: 11px;
-      font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      font-family: @mdCodeFontFamily;
       display: inline-block;
     }
 
